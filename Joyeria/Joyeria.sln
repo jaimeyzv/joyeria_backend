@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.API", "Joyeria.API\Joyeria.API.csproj", "{40681017-65A4-4EC7-80A3-CF7E47B184C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Data", "Joyeria.Data\Joyeria.Data.csproj", "{751201AA-0651-4DA1-B32B-119BC439627E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Core", "Joyeria.Core\Joyeria.Core.csproj", "{D22E2974-52C1-4D36-8023-CC7297AEA0AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Services", "Joyeria.Services\Joyeria.Services.csproj", "{CFC21749-BD15-4DA8-9451-CC1125CAA245}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40681017-65A4-4EC7-80A3-CF7E47B184C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40681017-65A4-4EC7-80A3-CF7E47B184C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40681017-65A4-4EC7-80A3-CF7E47B184C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40681017-65A4-4EC7-80A3-CF7E47B184C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751201AA-0651-4DA1-B32B-119BC439627E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751201AA-0651-4DA1-B32B-119BC439627E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751201AA-0651-4DA1-B32B-119BC439627E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751201AA-0651-4DA1-B32B-119BC439627E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22E2974-52C1-4D36-8023-CC7297AEA0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22E2974-52C1-4D36-8023-CC7297AEA0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22E2974-52C1-4D36-8023-CC7297AEA0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22E2974-52C1-4D36-8023-CC7297AEA0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC21749-BD15-4DA8-9451-CC1125CAA245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC21749-BD15-4DA8-9451-CC1125CAA245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC21749-BD15-4DA8-9451-CC1125CAA245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC21749-BD15-4DA8-9451-CC1125CAA245}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEBB0487-A11A-48FF-BA8E-039B794C9931}
+	EndGlobalSection
+EndGlobal

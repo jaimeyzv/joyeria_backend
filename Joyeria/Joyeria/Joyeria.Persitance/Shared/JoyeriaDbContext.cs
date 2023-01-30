@@ -1,4 +1,5 @@
 ﻿using Joyeria.Domain.Entities;
+using Joyeria.Persitance.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Joyeria.Persitance.Shared
@@ -12,6 +13,11 @@ namespace Joyeria.Persitance.Shared
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLazyLoadingProxies();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }

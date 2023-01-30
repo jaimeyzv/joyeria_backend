@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Domain\Joyeria.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCase\CategoryUC\Queries\" />
+  </ItemGroup>
+
 </Project>

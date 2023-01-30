@@ -3,21 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Api", "Joyeria.Api\Joyeria.Api.csproj", "{C388BE9A-D97C-4064-8184-9125244AAD98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Api", "Joyeria.Api\Joyeria.Api.csproj", "{C388BE9A-D97C-4064-8184-9125244AAD98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7C1A9B42-E71C-495A-9F1F-0CE6AC16F8BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2085D4BD-D3BE-4151-B851-63C69033D7D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2DD4D7FB-3059-4FB1-8924-36C29FB24688}"
+	ProjectSection(SolutionItems) = preProject
+		Joyeria.Infrastructure\Mapper\AutoMapperProfile.cs = Joyeria.Infrastructure\Mapper\AutoMapperProfile.cs
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Domain", "Domain\Joyeria.Domain.csproj", "{5E43C152-6E2A-4F14-8D6D-F6B9A693C11E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Domain", "Domain\Joyeria.Domain.csproj", "{5E43C152-6E2A-4F14-8D6D-F6B9A693C11E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Application", "Application\Joyeria.Application.csproj", "{C2A4F376-9532-4FE8-AD89-C03C8BC24811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Application", "Application\Joyeria.Application.csproj", "{C2A4F376-9532-4FE8-AD89-C03C8BC24811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Persitance", "Joyeria.Persitance\Joyeria.Persitance.csproj", "{ABD6DA8E-1E0B-45D6-B5D1-D3998BF19A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Persitance", "Joyeria.Persitance\Joyeria.Persitance.csproj", "{ABD6DA8E-1E0B-45D6-B5D1-D3998BF19A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joyeria.Infrastructure", "Joyeria.Infrastructure\Joyeria.Infrastructure.csproj", "{2DCC51F1-028B-455F-9163-FF272317F594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Infrastructure", "Joyeria.Infrastructure\Joyeria.Infrastructure.csproj", "{2DCC51F1-028B-455F-9163-FF272317F594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

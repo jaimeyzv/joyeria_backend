@@ -1,4 +1,7 @@
-﻿using Joyeria.Application.Interfaces.Services;
+﻿using AutoMapper;
+using Joyeria.Application.Interfaces.Services;
+using Joyeria.Application.UseCase.CategoryUC.Commands;
+using Joyeria.Application.UseCase.CategoryUC.Queries;
 using Joyeria.Application.ViewModels;
 using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -9,13 +12,17 @@ namespace Joyeria.Api.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoryCommands _categoryCommands;
+        private readonly ICategoryQueries _categoryQueries;
+        private readonly IMapper _mapper;
 
-
-
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryCommands categoryCommands, 
+            ICategoryQueries categoryQueries,
+            IMapper mapper)
         {
-            _categoryService = categoryService;
+            _categoryCommands = categoryCommands;
+            _categoryQueries = categoryQueries;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -23,7 +30,7 @@ namespace Joyeria.Api.Controllers
         {
             try
             {
-                var categories = await this._categoryService.GetCategoriesAsync();
+                var categories = await _categoryQueries.GetCategoriesAsync();
                 return Ok(categories);
             }
             catch (Exception ex)
@@ -45,7 +52,7 @@ namespace Joyeria.Api.Controllers
                     Name = category.Name
                 };
 
-                var categoryCreated = await _categoryService.CreateAsync(categoryToCreate);
+                var categoryCreated = await _categoryCommands.CreateAsync(categoryToCreate);
 
                 return Ok(categoryCreated);
             }
@@ -62,13 +69,14 @@ namespace Joyeria.Api.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload categoria no es valida");
 
-                var categoryFound = await this._categoryService.GetCategoryByIdAsync(id);
+                var categoryFound = _mapper.Map<Category>(category);
+                await _categoryQueries.GetCategoryByIdAsync(id);
+
                 if (categoryFound == null) return BadRequest($"Producto con id {id} no existe");
 
                 categoryFound.Name = category.Name;
 
-
-                var categoryUpdated = await _categoryService.UpdateAsync(categoryFound);
+                var categoryUpdated = await _categoryCommands.UpdateAsync(categoryFound);
 
                 return Ok(categoryUpdated);
             }

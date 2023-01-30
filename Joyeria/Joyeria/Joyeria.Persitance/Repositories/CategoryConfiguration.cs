@@ -14,7 +14,7 @@ namespace Joyeria.Persitance.Repositories
 
             builder.Property(c => c.Name)
                 .HasColumnName("Name")
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }

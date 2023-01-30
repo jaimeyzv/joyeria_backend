@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using Joyeria.Application.Interfaces;
 using Joyeria.Application.UseCase.CategoryUC.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Joyeria.Application.UseCase.CategoryUC.Queries
 {
@@ -21,13 +16,20 @@ namespace Joyeria.Application.UseCase.CategoryUC.Queries
         }
         public async Task<IEnumerable<CategoryModel>> GetCategoriesAsync()
         {
-            var models = _unitOfWork.Categories.GetCategoriesAsync();
+            var models = await _unitOfWork.Categories.GetCategoriesAsync();
+            return _mapper.Map<IEnumerable<CategoryModel>>(models);
             
         }
 
-        public Task<CategoryModel> GetCategoryByIdAsync(int id)
+        public async Task<CategoryModel> GetCategoryByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var categories = await _unitOfWork.Categories.GetCategoryByIdAsync(id);
+
+            var models = _mapper.Map<CategoryModel>(categories);
+
+            return models;
+
+
         }
     }
 }

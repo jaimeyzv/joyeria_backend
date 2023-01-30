@@ -1,12 +1,12 @@
-﻿//using Joyeria.Domain.Entities;
+﻿using Joyeria.Domain.Entities;
 
-//namespace Joyeria.Application.Interfaces.Services
-//{
-//    public interface ICategoryService
-//    {
-//        Task<IEnumerable<CategoryUC>> GetCategoriesAsync();
-//        Task<CategoryUC> GetCategoryByIdAsync(int id);
-//        Task<CategoryUC> CreateAsync(CategoryUC categoryToCreate);
-//        Task<CategoryUC> UpdateAsync(CategoryUC categoryToUpdate);
-//    }
-//}
+namespace Joyeria.Application.Interfaces.Services
+{
+    public interface ICategoryService
+    {
+        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<Category> GetCategoryByIdAsync(int id);
+        Task<Category> CreateAsync(Category categoryToCreate);
+        Task<Category> UpdateAsync(Category categoryToUpdate);
+    }
+}

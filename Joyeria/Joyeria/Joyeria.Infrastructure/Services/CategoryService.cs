@@ -8,6 +8,11 @@ namespace Joyeria.Infrastructure.Services
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        public CategoryService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task<Category> CreateAsync(Category categoryToCreate)
         {
             await _unitOfWork.Categories.CreateAsync(categoryToCreate);

@@ -2,7 +2,7 @@ using AutoMapper;
 using Joyeria.Application.Interfaces;
 using Joyeria.Application.Interfaces.Repositories;
 using Joyeria.Application.Interfaces.Services;
-using Joyeria.Infrastructure.Mapper;
+using Joyeria.Application.Mapper;
 using Joyeria.Infrastructure.Services;
 using Joyeria.Persitance.Repositories;
 using Joyeria.Persitance.Shared;
@@ -43,7 +43,7 @@ builder.Services.AddSwaggerGen();
 
 var config = new MapperConfiguration(cfg =>
 {
-    cfg.AddProfile(new AutoMapperProfile());
+    cfg.AddProfile(new AutorMapperProfile());
 });
 
 var mapper = config.CreateMapper();

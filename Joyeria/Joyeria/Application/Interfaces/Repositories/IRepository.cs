@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//namespace Joyeria.Application.Interfaces.Repositories
+//{
+//    public interface IRepository<T> : where T : SuperEntity
+//    {
+//        public IQueryable<T> GetAll();
+//        public T Get(Guid id);
+//        public T Add(T entity);
 
-namespace Joyeria.Application.Interfaces.Repositories
-{
-    internal interface IRepository
-    {
-    }
-}
+
+//    }
+//}

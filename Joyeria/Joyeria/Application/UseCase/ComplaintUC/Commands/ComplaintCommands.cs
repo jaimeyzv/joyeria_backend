@@ -20,6 +20,7 @@ namespace Joyeria.Application.UseCase.ComplaintUC.Commands
         {
             var domain = _mapper.Map<Complaint>(createToComplaints);
             await _unitOfWork.Complaint.CreateAsync(domain);
+            await _unitOfWork.SaveChangesAsync();
             return createToComplaints;
 
         }
@@ -34,6 +35,7 @@ namespace Joyeria.Application.UseCase.ComplaintUC.Commands
         {
             var domain = _mapper.Map<Complaint>(complaintToUpdate);
             await _unitOfWork.Complaint.UpdateAsync(domain);
+            await _unitOfWork.SaveChangesAsync();
             return complaintToUpdate;
 
         }

@@ -64,27 +64,7 @@ namespace Joyeria.API.Controllers
                 if (!ModelState.IsValid) return BadRequest($"  Hoja de Reclamacion  no es valido");
 
 
-                var complaintsToCreate = new Complaint()
-                {
-                    Datec = DateTime.Now,
-                    Name = complaint.Name,
-                    Address = complaint.Address,
-                    Ndoc = complaint.Ndoc,
-                    Email = complaint.Email,
-                    Cellphone = complaint.Cellphone,
-                    Repre = complaint.Repre,
-                    Typep = complaint.Typep,
-                    Price = complaint.Price,
-                    Descp = complaint.Descp,
-                    Typc = complaint.Typc,
-                    Descc = complaint.Descc,
-                    Pedic = complaint.Pedic,
-                    StatusC = 1
-
-                };
-
-
-                var model = _mapper.Map<ComplaintModel>(complaintsToCreate);
+                var model = _mapper.Map<ComplaintModel>(complaint);
                 var complaintCreated = await _complaintCommands.CreateAsync(model);
 
                 return Ok(complaintCreated);
@@ -125,7 +105,6 @@ namespace Joyeria.API.Controllers
                 
                 complaintFound.StatusC = complaint.StatusC;
              
-
                var complaintUpdated = await _complaintCommands.UpdateAsync(complaintFound);
 
                 return Ok(complaintUpdated);

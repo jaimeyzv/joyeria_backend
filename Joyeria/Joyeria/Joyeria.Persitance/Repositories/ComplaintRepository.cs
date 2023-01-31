@@ -38,8 +38,11 @@ namespace Joyeria.Persitance.Repositories
 
         public async Task<Complaint> UpdateAsync(Complaint complaintToUpdate)
         {
-            _dbContext.Complaint.Update(complaintToUpdate);
-            return await Task.FromResult(complaintToUpdate);
+            var complaintFound = await _dbContext.Complaint.FindAsync(complaintToUpdate.Id);
+            complaintFound.StatusC = complaintToUpdate.StatusC;
+            
+            _dbContext.Complaint.Update(complaintFound);
+            return complaintToUpdate;
         }
     }
 }

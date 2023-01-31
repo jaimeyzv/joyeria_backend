@@ -29,6 +29,7 @@ namespace Joyeria.Application.UseCase.CategoryUC.Commands
         {
             var models = _mapper.Map<Category>(categoryToUpdate);
             await _unitOfWork.Categories.UpdateAsync(models);
+            
             await _unitOfWork.SaveChangesAsync();
 
             return categoryToUpdate;

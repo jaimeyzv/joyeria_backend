@@ -1,11 +1,9 @@
 using AutoMapper;
 using Joyeria.Application.Interfaces;
 using Joyeria.Application.Interfaces.Repositories;
-using Joyeria.Application.Interfaces.Services;
 using Joyeria.Application.Mapper;
 using Joyeria.Application.UseCase.CategoryUC.Commands;
 using Joyeria.Application.UseCase.CategoryUC.Queries;
-using Joyeria.Infrastructure.Services;
 using Joyeria.Persitance.Repositories;
 using Joyeria.Persitance.Shared;
 using Microsoft.EntityFrameworkCore;

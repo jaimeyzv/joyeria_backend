@@ -74,8 +74,6 @@ namespace Joyeria.Api.Controllers
 
                 categoryFound.Name = category.Name;
 
-                //var viewModel = _mapper.Map<CategoryVM>(categoryFound);
-
                 var categoryUpdated = await _categoryCommands.UpdateAsync(categoryFound);
 
                 return Ok(categoryUpdated);

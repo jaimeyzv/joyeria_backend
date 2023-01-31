@@ -32,8 +32,12 @@ namespace Joyeria.Persitance.Repositories
 
         public async Task<Category> UpdateAsync(Category categoryToUpdate)
         {
-            _dbContext.Categories.Update(categoryToUpdate);
-            return await Task.FromResult(categoryToUpdate);
+            _dbContext.Entry(categoryToUpdate).State = EntityState.Detached;
+            _dbContext.Set<Category>().Update(categoryToUpdate);
+            _dbContext.SaveChanges();
+            return categoryToUpdate;
+            //_dbContext.Categories.Update(categoryToUpdate);
+            //return await Task.FromResult(categoryToUpdate);
         }
     }
 }

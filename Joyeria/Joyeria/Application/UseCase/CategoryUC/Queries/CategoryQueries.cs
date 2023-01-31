@@ -17,8 +17,8 @@ namespace Joyeria.Application.UseCase.CategoryUC.Queries
         public async Task<IEnumerable<CategoryModel>> GetCategoriesAsync()
         {
             var categories = await _unitOfWork.Categories.GetCategoriesAsync();
-            var models = _mapper.Map<IEnumerable<CategoryModel>>(categories);
-            return models;
+            var model = _mapper.Map<IEnumerable<CategoryModel>>(categories);
+            return model;
             
         }
 
@@ -26,9 +26,9 @@ namespace Joyeria.Application.UseCase.CategoryUC.Queries
         {
             var categories = await _unitOfWork.Categories.GetCategoryByIdAsync(id);
 
-            var models = _mapper.Map<CategoryModel>(categories);
+            var model = _mapper.Map<CategoryModel>(categories);
 
-            return models;
+            return model;
 
 
         }

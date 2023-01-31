@@ -3,6 +3,8 @@ using Joyeria.Application.Interfaces;
 using Joyeria.Application.Interfaces.Repositories;
 using Joyeria.Application.Interfaces.Services;
 using Joyeria.Application.Mapper;
+using Joyeria.Application.UseCase.CategoryUC.Commands;
+using Joyeria.Application.UseCase.CategoryUC.Queries;
 using Joyeria.Infrastructure.Services;
 using Joyeria.Persitance.Repositories;
 using Joyeria.Persitance.Shared;
@@ -20,11 +22,9 @@ builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IComplaintService, ComplaintService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryCommands , CategoryCommands>();
+builder.Services.AddScoped<ICategoryQueries, CategoryQueries>();
+
 
 builder.Services.AddDbContext<JoyeriaDbContext>(
     options =>

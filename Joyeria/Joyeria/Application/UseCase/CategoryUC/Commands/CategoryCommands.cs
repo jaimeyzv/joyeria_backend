@@ -15,22 +15,23 @@ namespace Joyeria.Application.UseCase.CategoryUC.Commands
             _mapper = mapper;
         }
 
-        public async Task<CategoryModel> CreateAsync(Category categoryToCreate)
+        public async Task<CategoryModel> CreateAsync(CategoryModel categoryToCreate)
         {
-            var models = _mapper.Map<CategoryModel>(categoryToCreate);
-            await _unitOfWork.Categories.CreateAsync(categoryToCreate);
+            var models = _mapper.Map<Category>(categoryToCreate);
+            await _unitOfWork.Categories.CreateAsync(models);
             await _unitOfWork.SaveChangesAsync();
 
-            return models;
+            return categoryToCreate;
+
         }
 
-        public async Task<CategoryModel> UpdateAsync(Category categoryToUpdate)
+        public async Task<CategoryModel> UpdateAsync(CategoryModel categoryToUpdate)
         {
-            var models = _mapper.Map<CategoryModel>(categoryToUpdate);
-            await _unitOfWork.Categories.UpdateAsync(categoryToUpdate);
+            var models = _mapper.Map<Category>(categoryToUpdate);
+            await _unitOfWork.Categories.UpdateAsync(models);
             await _unitOfWork.SaveChangesAsync();
 
-            return models;
+            return categoryToUpdate;
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Joyeria.Application.Interfaces.Services;
 using Joyeria.Application.UseCase.CategoryUC.Commands;
 using Joyeria.Application.UseCase.CategoryUC.Queries;
 using Joyeria.Application.ViewModels;
-using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Joyeria.Api.Controllers
@@ -47,7 +45,7 @@ namespace Joyeria.Api.Controllers
                 if (!ModelState.IsValid) return BadRequest($"Payload categoria no es valida");
 
 
-                var categoryToCreate = new Category()
+                var categoryToCreate = new CategoryModel()
                 {
                     Name = category.Name
                 };
@@ -69,12 +67,14 @@ namespace Joyeria.Api.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload categoria no es valida");
 
-                var categoryFound = _mapper.Map<Category>(category);
-                await _categoryQueries.GetCategoryByIdAsync(id);
+                
+                var categoryFound = await _categoryQueries.GetCategoryByIdAsync(id);
 
                 if (categoryFound == null) return BadRequest($"Producto con id {id} no existe");
 
                 categoryFound.Name = category.Name;
+
+                //var viewModel = _mapper.Map<CategoryVM>(categoryFound);
 
                 var categoryUpdated = await _categoryCommands.UpdateAsync(categoryFound);
 

@@ -1,4 +1,6 @@
-﻿using Joyeria.Application.Interfaces.Services;
+﻿using AutoMapper;
+using Joyeria.Application.UseCase.ComplaintUC.Commands;
+using Joyeria.Application.UseCase.ComplaintUC.Queries;
 using Joyeria.Application.ViewModels;
 using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +11,17 @@ namespace Joyeria.API.Controllers
     [ApiController]
     public class ComplaintController : ControllerBase
     {
-        private readonly IComplaintService _complaintService;
+        private readonly IComplaintCommands _complaintCommands;
+        private readonly IComplaintQueries _complaintQueries;
+        private readonly IMapper _mapper;
 
-        public ComplaintController(IComplaintService complaintService)
+        public ComplaintController(IComplaintCommands complaintCommands,
+            IComplaintQueries complaintQueries,
+            IMapper mapper)
         {
-            _complaintService = complaintService;
+            _complaintCommands = complaintCommands;
+            _complaintQueries = complaintQueries;
+            _mapper = mapper;
         }
 
 
@@ -22,7 +30,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var complaint = await this._complaintService.GetComplaintsAsync();
+                var complaint = await _complaintQueries.GetComplaintsAsync();
                 return Ok(complaint);
             }
             catch (Exception ex)
@@ -35,7 +43,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var product = await this._complaintService.GetComplaintstByIdAsync(id);
+                var product = await _complaintQueries.GetComplaintstByIdAsync(id);
                 if (product == null) return BadRequest($"Hoja de Reclamacion con id {id} no existe");
 
                 return Ok(product);
@@ -75,7 +83,9 @@ namespace Joyeria.API.Controllers
 
                 };
 
-                var complaintCreated = await _complaintService.CreateAsync(complaintsToCreate);
+
+                var model = _mapper.Map<ComplaintModel>(complaintsToCreate);
+                var complaintCreated = await _complaintCommands.CreateAsync(model);
 
                 return Ok(complaintCreated);
             }
@@ -91,9 +101,9 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var product = await this._complaintService.GetComplaintstByIdAsync(id);
+                var product = await _complaintQueries.GetComplaintstByIdAsync(id);
                 if (product == null) return BadRequest($"Hoja de Reclamacion  con id {id} no existe");
-                await this._complaintService.DeleteAsync(id);
+                await _complaintCommands.DeleteAsync(id);
 
                 return Ok();
             }
@@ -110,13 +120,13 @@ namespace Joyeria.API.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload  Estado no es valido");
 
-                var complaintFound = await this._complaintService.GetComplaintstByIdAsync(id);
+                var complaintFound = await _complaintQueries.GetComplaintstByIdAsync(id);
                 if (complaintFound == null) return BadRequest($"Complaint con id {id} no existe");
                 
                 complaintFound.StatusC = complaint.StatusC;
              
 
-               var complaintUpdated = await _complaintService.UpdateAsync(complaintFound);
+               var complaintUpdated = await _complaintCommands.UpdateAsync(complaintFound);
 
                 return Ok(complaintUpdated);
             }

@@ -17,8 +17,8 @@ namespace Joyeria.Application.UseCase.CategoryUC.Commands
 
         public async Task<CategoryModel> CreateAsync(CategoryModel categoryToCreate)
         {
-            var model = _mapper.Map<Category>(categoryToCreate);
-            await _unitOfWork.Categories.CreateAsync(model);
+            var domain = _mapper.Map<Category>(categoryToCreate);
+            await _unitOfWork.Categories.CreateAsync(domain);
             await _unitOfWork.SaveChangesAsync();
 
             return categoryToCreate;
@@ -27,8 +27,8 @@ namespace Joyeria.Application.UseCase.CategoryUC.Commands
 
         public async Task<CategoryModel> UpdateAsync(CategoryModel categoryToUpdate)
         {
-            var model = _mapper.Map<Category>(categoryToUpdate);
-            await _unitOfWork.Categories.UpdateAsync(model);
+            var domain = _mapper.Map<Category>(categoryToUpdate);
+            await _unitOfWork.Categories.UpdateAsync(domain);
             
             await _unitOfWork.SaveChangesAsync();
 

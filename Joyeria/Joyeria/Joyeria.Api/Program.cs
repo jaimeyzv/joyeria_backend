@@ -32,6 +32,7 @@ builder.Services.AddDbContext<JoyeriaDbContext>(
     options =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("JoyeriaDb"));
+        options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     });
 
 builder.Services.AddCors(options => options.AddPolicy("AlloWebApp",

@@ -1,4 +1,5 @@
-﻿using Joyeria.Application.Interfaces.Repositories;
+﻿using Joyeria.Application.Interfaces;
+using Joyeria.Application.Interfaces.Repositories;
 using Joyeria.Domain.Entities;
 using Joyeria.Persitance.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -38,10 +39,9 @@ namespace Joyeria.Persitance.Repositories
 
         public async Task<Complaint> UpdateAsync(Complaint complaintToUpdate)
         {
-            var complaintFound = await _dbContext.Complaint.FindAsync(complaintToUpdate.Id);
-            complaintFound.StatusC = complaintToUpdate.StatusC;
-            
-            _dbContext.Complaint.Update(complaintFound);
+            //var complaintFound = await _dbContext.Complaint.ToListAsync();
+            //var complaintUpdated = complaintFound;
+            _dbContext.Complaint.Update(complaintToUpdate);
             return complaintToUpdate;
         }
     }

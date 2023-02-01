@@ -1,4 +1,7 @@
-﻿using Joyeria.Application.Interfaces.Services;
+﻿using AutoMapper;
+using Joyeria.Application.Interfaces.Services;
+using Joyeria.Application.UseCase.OrderUC.Commands;
+using Joyeria.Application.UseCase.OrderUC.Queries;
 using Joyeria.Application.ViewModels;
 using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +12,16 @@ namespace Joyeria.API.Controllers
     [ApiController]
     public class OrderController: ControllerBase
     {
-        private readonly IOrderService _orderService;
+        private readonly IOrderCommands _orderCommands;
+        private readonly IOrderQueries _orderQueries;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderCommands orderCommands,
+            IOrderQueries orderQueries, IMapper mapper)
         {
-            _orderService = orderService;
-           
+            _orderCommands = orderCommands;
+            _orderQueries = orderQueries;
+            _mapper = mapper;
         }
 
 
@@ -25,7 +32,7 @@ namespace Joyeria.API.Controllers
             {
                 
                 
-                var orders = await this._orderService.GetOrdersAsync();
+                var orders = await _orderQueries.GetOrdersAsync();
                 foreach (var item in orders)
                 {
                     Console.WriteLine(item.detalle);
@@ -45,7 +52,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var orders = await this._orderService.GetResumen();
+                var orders = await _orderQueries.GetResumen();
                 return Ok(orders);
             }
             catch (Exception ex)
@@ -58,7 +65,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var order = await this._orderService.GetOrdeByIdAsync(id);
+                var order = await _orderQueries.GetOrdeByIdAsync(id);
                 if (order == null) return BadRequest($"Order con id {id} no existe");
 
                 return Ok(order);
@@ -99,7 +106,7 @@ namespace Joyeria.API.Controllers
                     });
                 }
 
-                var orderCreated = await _orderService.CreateAsync(orderToCreate);
+                var orderCreated = _orderCommands.CreateAsync(orderToCreate);
 
                 return Ok(orderCreated);
             }

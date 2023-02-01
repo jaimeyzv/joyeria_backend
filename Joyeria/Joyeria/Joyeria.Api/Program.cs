@@ -6,6 +6,8 @@ using Joyeria.Application.UseCase.CategoryUC.Commands;
 using Joyeria.Application.UseCase.CategoryUC.Queries;
 using Joyeria.Application.UseCase.ComplaintUC.Commands;
 using Joyeria.Application.UseCase.ComplaintUC.Queries;
+using Joyeria.Application.UseCase.OrderUC.Commands;
+using Joyeria.Application.UseCase.OrderUC.Queries;
 using Joyeria.Persitance.Repositories;
 using Joyeria.Persitance.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,9 @@ builder.Services.AddScoped<ICategoryCommands , CategoryCommands>();
 builder.Services.AddScoped<ICategoryQueries, CategoryQueries>();
 builder.Services.AddScoped<IComplaintCommands, ComplaintCommands>();
 builder.Services.AddScoped<IComplaintQueries, ComplaintQueries>();
+builder.Services.AddScoped<IOrderCommands, OrderCommands>();
+builder.Services.AddScoped<IOrderQueries, OrderQueries>();
+
 
 
 builder.Services.AddDbContext<JoyeriaDbContext>(

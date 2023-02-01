@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Joyeria.Application.Interfaces.Services;
 using Joyeria.Application.UseCase.OrderUC.Commands;
 using Joyeria.Application.UseCase.OrderUC.Queries;
 using Joyeria.Application.ViewModels;
-using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Joyeria.API.Controllers
@@ -30,8 +28,6 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                
-                
                 var orders = await _orderQueries.GetOrdersAsync();
                 foreach (var item in orders)
                 {
@@ -82,25 +78,25 @@ namespace Joyeria.API.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload order no es valido");
-                
 
-                var orderToCreate = new Order()
+
+                var orderToCreate = new OrderModel()
                 {
                     Date = order.Date,
                     UserId = order.UserId,
                     StatusId = order.StatusId,
                     Total = order.Total,
-                    detalle =  new List<OrderItem>()
+                    detalle = new List<OrderItemModel>()
                     //CategoryId = proorderduct.CategoryId,
                 };
                 foreach (var itemCrear in order.detalle)
                 {
-                    orderToCreate.detalle.Add(new OrderItem
+                    orderToCreate.detalle.Add(new OrderItemModel
                     {
                         Amount = itemCrear.Amount,
                         Price = itemCrear.Price,
                         TotalAmount = itemCrear.TotalAmount,
-         
+
                         ProductId = itemCrear.ProductId
 
                     });

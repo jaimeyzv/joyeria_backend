@@ -18,10 +18,13 @@ namespace Joyeria.Application.Mapper
             CreateMap<ComplaintVM, ComplaintModel>().ReverseMap();
             CreateMap<ComplaintModel, Complaint>().ReverseMap();
 
-            CreateMap<OrderItemVM, OrderItem>().ReverseMap();
+            CreateMap<OrderItemVM, OrderItemModel>().ReverseMap();
+            CreateMap<OrderItemModel, OrderItem>().ReverseMap();
 
             CreateMap<OrderVM, OrderModel>().ReverseMap();
-            CreateMap<OrderModel, Order>().ReverseMap();
+            CreateMap<OrderModel, Order>()
+                .ForMember(dest => dest.detalle, opt => opt.MapFrom(src => src.detalle));
+                //.ReverseMap();
 
             CreateMap<ProductVM, Product>().ReverseMap();
 

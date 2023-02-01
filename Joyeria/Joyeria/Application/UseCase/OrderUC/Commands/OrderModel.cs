@@ -1,4 +1,6 @@
-﻿namespace Joyeria.Application.UseCase.OrderUC.Commands
+﻿using Joyeria.Domain.Entities;
+
+namespace Joyeria.Application.UseCase.OrderUC.Commands
 {
     public class OrderModel
     {
@@ -7,5 +9,7 @@
         public int UserId { get; set; }
         public int StatusId { get; set; }
         public decimal Total { get; set; }
+
+        public virtual List<OrderItemModel> detalle { get; set; }
     }
 }

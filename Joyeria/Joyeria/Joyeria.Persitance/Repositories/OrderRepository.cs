@@ -20,9 +20,11 @@ namespace Joyeria.Persitance.Repositories
             return orderToCreate;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var order = await _dbContext.Orders.FindAsync(id);
+            _dbContext.Orders.Remove(order);
+            
         }
 
         public async Task<Order> GetOrdeByIdAsync(Guid id)

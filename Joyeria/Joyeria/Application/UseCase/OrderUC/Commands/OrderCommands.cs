@@ -22,9 +22,10 @@ namespace Joyeria.Application.UseCase.OrderUC.Commands
             return orderToCreate;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.Orders.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public Task<OrderModel> UpdateAsync(OrderModel orderToUpdate)

@@ -2,6 +2,9 @@
 using Joyeria.Application.UseCase.CategoryUC.Commands;
 using Joyeria.Application.UseCase.ComplaintUC.Commands;
 using Joyeria.Application.UseCase.OrderUC.Commands;
+using Joyeria.Application.UseCase.OrderUC.Queries;
+using Joyeria.Application.UseCase.ProductUC.Commands;
+using Joyeria.Application.UseCase.UserUC.Commands;
 using Joyeria.Application.ViewModels;
 using Joyeria.Domain.Entities;
 using Joyeria.Domain.Entities.Report;
@@ -22,15 +25,16 @@ namespace Joyeria.Application.Mapper
             CreateMap<OrderItemModel, OrderItem>().ReverseMap();
 
             CreateMap<OrderVM, OrderModel>().ReverseMap();
-            CreateMap<OrderModel, Order>()
-                .ForMember(dest => dest.detalle, opt => opt.MapFrom(src => src.detalle));
-                //.ReverseMap();
+            CreateMap<OrderModel, Order>().ReverseMap();
 
-            CreateMap<ProductVM, Product>().ReverseMap();
+            CreateMap<ProductVM, ProductModel>().ReverseMap();
+            CreateMap<ProductModel, Product>().ReverseMap();
 
-            CreateMap<ProductVM, Product>().ReverseMap();
-            CreateMap<ReporteVM, ReporteVentas>().ReverseMap();
-            CreateMap<UserVM, User>().ReverseMap();
+            CreateMap<ReporteVM, ReporteVentasModel>().ReverseMap();
+            CreateMap<ReporteVentasModel, ReporteVentas>().ReverseMap();
+
+            CreateMap<UserVM, UserModel>().ReverseMap();
+            CreateMap<UserModel, User>().ReverseMap();
         }
     }
 }

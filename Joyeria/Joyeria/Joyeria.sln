@@ -10,9 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2085D4BD-D3BE-4151-B851-63C69033D7D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2DD4D7FB-3059-4FB1-8924-36C29FB24688}"
-	ProjectSection(SolutionItems) = preProject
-		Joyeria.Infrastructure\Mapper\AutoMapperProfile.cs = Joyeria.Infrastructure\Mapper\AutoMapperProfile.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joyeria.Domain", "Domain\Joyeria.Domain.csproj", "{5E43C152-6E2A-4F14-8D6D-F6B9A693C11E}"
 EndProject

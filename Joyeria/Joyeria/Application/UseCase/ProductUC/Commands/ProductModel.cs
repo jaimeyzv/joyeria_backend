@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Joyeria.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Joyeria.Domain.Entities
+namespace Joyeria.Application.UseCase.ProductUC.Commands
 {
-    public class Product
+    public class ProductModel
     {
         public Guid Id { get; set; }
         public string ?Name { get; set; }

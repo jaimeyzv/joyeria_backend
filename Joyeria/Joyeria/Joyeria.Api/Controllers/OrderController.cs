@@ -22,7 +22,6 @@ namespace Joyeria.API.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetOrder()
         {
@@ -42,7 +41,6 @@ namespace Joyeria.API.Controllers
         }
 
 
-
         [HttpGet("resumen")]
         public async Task<IActionResult> Resumen()
         {
@@ -56,6 +54,7 @@ namespace Joyeria.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetOrderById([FromRoute] Guid id)
         {
@@ -63,7 +62,6 @@ namespace Joyeria.API.Controllers
             {
                 var order = await _orderQueries.GetOrdeByIdAsync(id);
                 if (order == null) return BadRequest($"Order con id {id} no existe");
-
                 return Ok(order);
             }
             catch (Exception ex)
@@ -78,32 +76,8 @@ namespace Joyeria.API.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload order no es valido");
-
-
-                var orderToCreate = new OrderModel()
-                {
-                    Date = order.Date,
-                    UserId = order.UserId,
-                    StatusId = order.StatusId,
-                    Total = order.Total,
-                    detalle = new List<OrderItemModel>()
-                    //CategoryId = proorderduct.CategoryId,
-                };
-                foreach (var itemCrear in order.detalle)
-                {
-                    orderToCreate.detalle.Add(new OrderItemModel
-                    {
-                        Amount = itemCrear.Amount,
-                        Price = itemCrear.Price,
-                        TotalAmount = itemCrear.TotalAmount,
-
-                        ProductId = itemCrear.ProductId
-
-                    });
-                }
-
-                var orderCreated = _orderCommands.CreateAsync(orderToCreate);
-
+                var orderToCreate = _mapper.Map<OrderModel>(order);
+                var orderCreated =  await _orderCommands.CreateAsync(orderToCreate);
                 return Ok(orderCreated);
             }
             catch (Exception ex)

@@ -1,6 +1,9 @@
-﻿using Joyeria.Application.Interfaces.Services;
+﻿using AutoMapper;
+using Joyeria.Application.UseCase.CategoryUC.Commands;
+using Joyeria.Application.UseCase.CategoryUC.Queries;
+using Joyeria.Application.UseCase.ProductUC.Commands;
+using Joyeria.Application.UseCase.ProductUC.Queries;
 using Joyeria.Application.ViewModels;
-using Joyeria.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Joyeria.API.Controllers
@@ -9,14 +12,25 @@ namespace Joyeria.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
-        private readonly ICategoryService _categoryService;
+        
+        private readonly IProductCommands _productCommands;
+        private readonly IProductQueries _productQueries;
+        private readonly ICategoryCommands _categoryCommands;
+        private readonly ICategoryQueries _categoryQueries;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService,
-            ICategoryService categoryService)
+        public ProductController(IProductCommands productCommands,
+            IProductQueries productQueries,
+            ICategoryCommands categoryCommands,
+            ICategoryQueries categoryQueries,
+            IMapper mapper)
         {
-            _productService = productService;
-            _categoryService = categoryService;
+            
+            _productCommands = productCommands;
+            _productQueries = productQueries;
+            _categoryCommands = categoryCommands;
+            _categoryQueries = categoryQueries;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,7 +38,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var products = await this._productService.GetProductsAsync();
+                var products = await _productQueries.GetProductsAsync();
                 return Ok(products);
             }
             catch (Exception ex)
@@ -38,7 +52,7 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var product = await this._productService.GetProductByIdAsync(id);
+                var product = await _productQueries.GetProductByIdAsync(id);
                 if (product == null) return BadRequest($"Producto con id {id} no existe");
 
                 return Ok(product);
@@ -54,9 +68,9 @@ namespace Joyeria.API.Controllers
         {
             try
             {
-                var product = await this._productService.GetProductByIdAsync(id);
+                var product = await _productQueries.GetProductByIdAsync(id);
                 if (product == null) return BadRequest($"Producto con id {id} no existe");
-                await this._productService.DeleteAsync(id);
+                await _productCommands.DeleteAsync(id);
 
                 return Ok();
             }
@@ -72,19 +86,11 @@ namespace Joyeria.API.Controllers
             try
             {
                 if(!ModelState.IsValid) return BadRequest($"Payload producto no es valido");
-                var category = await this._categoryService.GetCategoryByIdAsync(product.CategoryId);
+                var category = await _categoryQueries.GetCategoryByIdAsync(product.CategoryId);
                 if (category == null) return BadRequest($"Category con id {product.CategoryId} no existe");
 
-                var productToCreate = new Product()
-                { 
-                    Name = product.Name,
-                    Description = product.Description,
-                    Stock = product.Stock,
-                    Price = product.Price,
-                    CategoryId = product.CategoryId,
-                };
-
-                var productCreated = await _productService.CreateAsync(productToCreate);
+                var model = _mapper.Map<ProductModel>(product);
+                var productCreated = await _productCommands.CreateAsync(model);
 
                 return Ok(productCreated);
             }
@@ -102,18 +108,13 @@ namespace Joyeria.API.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest($"Payload producto no es valido");
-                var category = await this._categoryService.GetCategoryByIdAsync(product.CategoryId);
+                var category = await _categoryQueries.GetCategoryByIdAsync(product.CategoryId);
                 if (category == null) return BadRequest($"Category con id {product.CategoryId} no existe");
-                var productFound = await this._productService.GetProductByIdAsync(id);
-                if (productFound == null) return BadRequest($"Producto con id {id} no existe");
+                var productFound = await _productQueries.GetProductByIdAsync(id);
+                if (productFound == null) return BadRequest($"Producto con id {id} no existe");     
 
-                productFound.Name = product.Name;
-                productFound.Description = product.Description;
-                productFound.Stock = product.Stock;
-                productFound.Price = product.Price;
-                productFound.CategoryId = product.CategoryId;
-
-                var productUpdated = await _productService.UpdateAsync(productFound);
+                var model = _mapper.Map<ProductModel>(product);
+                var productUpdated = await _productCommands.UpdateAsync(model);
 
                 return Ok(productUpdated);
             }

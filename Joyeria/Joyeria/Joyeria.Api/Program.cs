@@ -8,6 +8,10 @@ using Joyeria.Application.UseCase.ComplaintUC.Commands;
 using Joyeria.Application.UseCase.ComplaintUC.Queries;
 using Joyeria.Application.UseCase.OrderUC.Commands;
 using Joyeria.Application.UseCase.OrderUC.Queries;
+using Joyeria.Application.UseCase.ProductUC.Commands;
+using Joyeria.Application.UseCase.ProductUC.Queries;
+using Joyeria.Application.UseCase.UserUC.Commands;
+using Joyeria.Application.UseCase.UserUC.Queries;
 using Joyeria.Persitance.Repositories;
 using Joyeria.Persitance.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +20,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+builder.Services.AddControllers();
+
+//builder.Services.AddControllers().AddNewtonsoftJson(options =>
+//                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+//            );
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -32,8 +38,10 @@ builder.Services.AddScoped<IComplaintCommands, ComplaintCommands>();
 builder.Services.AddScoped<IComplaintQueries, ComplaintQueries>();
 builder.Services.AddScoped<IOrderCommands, OrderCommands>();
 builder.Services.AddScoped<IOrderQueries, OrderQueries>();
-
-
+builder.Services.AddScoped<IProductCommands, ProductCommands>();
+builder.Services.AddScoped<IProductQueries, ProductQueries>();          
+builder.Services.AddScoped<IUserCommands, UserCommands>();
+builder.Services.AddScoped<IUserQueries, UserQueries>();
 
 builder.Services.AddDbContext<JoyeriaDbContext>(
     options =>
